@@ -1,2 +1,4 @@
-__pycache__	# Python cache file
-**/config.py	# Config file containing sensitive information
+# Python cache file
+**/__pycache__
+# Config file containing sensitive information
+**/config.py
