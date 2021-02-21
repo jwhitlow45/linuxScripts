@@ -1,5 +1,5 @@
 import os
-from os.path import expanduser
+from os.path import commonpath, expanduser
 import sys
 import webbrowser
 import csv
@@ -42,6 +42,8 @@ def main():
             join()
         elif COMMAND == 'list':
             list()
+        elif COMMAND == 'help':
+            help()
         else:
             raise ValueError('**exception**: invalid command given')        
     except ValueError as error:
@@ -157,6 +159,20 @@ def list():
         for row in csv.reader(config):
             print(row[0], end=' ')
         print('')
+
+# List all commands
+def help():
+    # Check argument size
+    if ARGSIZE != 1:
+        raise ValueError('**exception**: help does not take any arguments')
+
+    print('Available commands are:')
+    print('zm add [name] [link] [password]  # Add meeting to list')
+    print('zm remove [name]                 # Remove meeting from list')
+    print('zm join [name]                   # Join meeting')
+    print('zm list                          # Show list of meetings')
+    print('zm sort                          # Sort meetings in list alphabetically')
+    print('zm clear                         # Remove all meetings from list')
 
 if __name__ == "__main__":
     main()
