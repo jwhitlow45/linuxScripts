@@ -115,6 +115,11 @@ def sort():
         rows = []
         for row in csv.reader(reader):
             rows.append(row)
+        # Prevent unnecessary sorting
+        if len(rows) < 2:
+            os.remove(TMP_FILE)
+            raise ValueError('**exception**: too few meetings to sort')
+
         rows.sort()
         writer = csv.writer(output)
         writer.writerows(rows)
