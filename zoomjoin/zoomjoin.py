@@ -1,4 +1,5 @@
 import os
+from os.path import expanduser
 import sys
 import webbrowser
 import csv
@@ -17,7 +18,7 @@ if ARGSIZE > 2:
 if ARGSIZE > 3:
     PASSWORD = sys.argv[4]
 
-HOME = os.path.expanduser('~')
+HOME = expanduser('~')
 CONFIG_FILE = HOME + '/scripts/zoomjoin/config.csv'
 TMP_FILE = HOME + '/scripts/zoomjoin/tmp.csv'
 
@@ -43,13 +44,21 @@ def add():
         raise ValueError('**exception**: add only takes argument(s) [name link password]')
 
     # Add name, link, and password (optional) to csv
-    with open(CONFIG_FILE, 'w') as config:
+    with open(CONFIG_FILE, 'a') as config, open(CONFIG_FILE, 'r') as reader:
+        # Check for duplicate name
+        for row in csv.reader(reader):
+            if row[0] == NAME:
+                print(f"'{NAME}' already exists...")
+                return
+        # Write meeting to csv
         writer = csv.writer(config)
         row = [NAME, LINK, PASSWORD]
         writer.writerow(row)
+        print(f"'{NAME}' meeting has been created")
 
 # Remove meeting from csv
 def remove():
+    meeting_removed = False
     # Check argument number
     if ARGSIZE != 2:
         raise ValueError('**exception**: remove only takes argument(s) [name]')
@@ -58,10 +67,17 @@ def remove():
         writer = csv.writer(out)
         for row in csv.reader(config):
             if row[0] != NAME:
-                writer.writerow(out)
+                writer.writerow(row)
+            else:
+                meeting_removed = True
 
+    # Delete old config file and replace with new config file
     os.remove(CONFIG_FILE)
     os.rename(TMP_FILE, CONFIG_FILE)
+    if meeting_removed:
+        print(f"'{NAME}' has been removed")
+    else:
+        print(f"'{NAME}' does not exist...")
 
 # Join meeting in csv
 def join():
@@ -74,8 +90,11 @@ def join():
         for row in csv.reader(config):
             if row[0] == NAME:
                 webbrowser.open(row[1])
+                print(f"Joining '{NAME}'...")
                 if row[2] != '':
                     print('Password: ' + row[2])
+                break
+
 
 # List all meetings stored in config.csv
 def list():
