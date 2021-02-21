@@ -7,6 +7,7 @@ import csv
 # GLOBAL VARIABLES
 ARGSIZE = len(sys.argv) - 1
 
+# ARGUMENTS
 COMMAND = sys.argv[1]
 NAME = ''
 LINK = ''
@@ -18,6 +19,7 @@ if ARGSIZE > 2:
 if ARGSIZE > 3:
     PASSWORD = sys.argv[4]
 
+# PATHS
 HOME = expanduser('~')
 CONFIG_FILE = HOME + '/scripts/zoomjoin/config.csv'
 TMP_FILE = HOME + '/scripts/zoomjoin/tmp.csv'
@@ -32,6 +34,8 @@ def main():
             add()
         elif COMMAND == 'remove':
             remove()
+        elif COMMAND == 'clear':
+            clear()
         elif COMMAND == 'join':
             join()
         elif COMMAND == 'list':
@@ -83,6 +87,17 @@ def remove():
     else:
         print(f"'{NAME}' does not exist...")
 
+# Completely erase csv file
+def clear():
+    response = input('Are you sure you want to remove all meetings?: ').lower()
+    if response == 'y' or response == 'yes':
+        os.remove(CONFIG_FILE)
+        with open(CONFIG_FILE, 'w'):
+            pass
+        print('Cleared all meetings')
+    else:
+        print('Aborted removing all meetings...')
+
 # Join meeting in csv
 def join():
     # Check argument number
@@ -99,7 +114,6 @@ def join():
                     print('Password: ' + row[2])
                 break
 
-
 # List all meetings stored in config.csv
 def list():
     # Check argument number
@@ -108,7 +122,7 @@ def list():
 
     # List out stored meetings
     with open(CONFIG_FILE, 'r') as config:
-        print("Stored meetings: ", end='')
+        print("Available meetings: ", end='')
         for row in csv.reader(config):
             print(row[0], end=' ')
         print('')
