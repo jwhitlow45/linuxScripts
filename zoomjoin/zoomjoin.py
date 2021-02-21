@@ -36,6 +36,8 @@ def main():
             remove()
         elif COMMAND == 'clear':
             clear()
+        elif COMMAND == 'sort':
+            sort()
         elif COMMAND == 'join':
             join()
         elif COMMAND == 'list':
@@ -47,7 +49,7 @@ def main():
 
 # Add meeting to csv
 def add():
-    # Check argument number
+    # Check argument size
     if ARGSIZE < 3 or ARGSIZE > 4:
         raise ValueError('**exception**: add only takes argument(s) [name link password]')
 
@@ -67,7 +69,7 @@ def add():
 # Remove meeting from csv
 def remove():
     meeting_removed = False
-    # Check argument number
+    # Check argument size
     if ARGSIZE != 2:
         raise ValueError('**exception**: remove only takes argument(s) [name]')
 
@@ -89,6 +91,10 @@ def remove():
 
 # Completely erase csv file
 def clear():
+    # Check argument size
+    if ARGSIZE != 1:
+        raise ValueError('**exception**: clear does not take any arguments')
+
     response = input('Are you sure you want to remove all meetings?: ').lower()
     if response == 'y' or response == 'yes':
         os.remove(CONFIG_FILE)
@@ -98,9 +104,27 @@ def clear():
     else:
         print('Aborted removing all meetings...')
 
+# Sort meetings alphabetically
+def sort():
+    # Check argument size
+    if ARGSIZE != 1:
+        raise ValueError('**exception**: sort does not take any arguments')
+
+    with open(CONFIG_FILE, 'r') as reader, open(TMP_FILE, 'w') as output:
+        rows = []
+        for row in csv.reader(reader):
+            rows.append(row)
+        rows.sort()
+        writer = csv.writer(output)
+        writer.writerows(rows)
+
+    os.remove(CONFIG_FILE)
+    os.rename(TMP_FILE, CONFIG_FILE)
+    print('Sorted meetings alphabetically')
+
 # Join meeting in csv
 def join():
-    # Check argument number
+    # Check argument size
     if ARGSIZE != 2:
         raise ValueError('**exception**: join only takes argument(s) [name]')
 
@@ -116,7 +140,7 @@ def join():
 
 # List all meetings stored in config.csv
 def list():
-    # Check argument number
+    # Check argument size
     if ARGSIZE != 1:
         raise ValueError('**exception**: list does not take any arguments')
 
