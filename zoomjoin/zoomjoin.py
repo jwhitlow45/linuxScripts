@@ -110,6 +110,7 @@ def sort():
     if ARGSIZE != 1:
         raise ValueError('**exception**: sort does not take any arguments')
 
+    # Store all rows of csv in a list to be sorted
     with open(CONFIG_FILE, 'r') as reader, open(TMP_FILE, 'w') as output:
         rows = []
         for row in csv.reader(reader):
@@ -118,6 +119,7 @@ def sort():
         writer = csv.writer(output)
         writer.writerows(rows)
 
+    # Overwrite old config with new config file
     os.remove(CONFIG_FILE)
     os.rename(TMP_FILE, CONFIG_FILE)
     print('Sorted meetings alphabetically')
