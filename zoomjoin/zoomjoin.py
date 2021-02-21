@@ -23,6 +23,10 @@ CONFIG_FILE = HOME + '/scripts/zoomjoin/config.csv'
 TMP_FILE = HOME + '/scripts/zoomjoin/tmp.csv'
 
 def main():
+    if not os.path.exists(CONFIG_FILE):
+        with open(CONFIG_FILE, 'w'):
+            print('Created initial config file...')
+
     try:
         if COMMAND == 'add':
             add()
