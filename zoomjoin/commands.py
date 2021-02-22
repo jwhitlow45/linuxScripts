@@ -102,10 +102,10 @@ def join():
                 break
 
 # List all meetings stored in config.csv
-def list():
+def ls():
     # Check argument size
     if ARGSIZE != 1:
-        raise ValueError('**exception**: list does not take any arguments')
+        raise ValueError('**exception**: ls does not take any arguments')
 
     # List out stored meetings
     with open(CONFIG_FILE, 'r') as config:
@@ -124,6 +124,6 @@ def help():
     print('zm add [name] [link] [password]  # Add meeting to list')
     print('zm remove [name]                 # Remove meeting from list')
     print('zm join [name]                   # Join meeting')
-    print('zm list                          # Show list of meetings')
+    print('zm ls                            # Show list of meetings')
     print('zm sort                          # Sort meetings in list alphabetically')
     print('zm clear                         # Remove all meetings from list')
