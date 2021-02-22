@@ -102,6 +102,8 @@ def join():
                     print('Password: ' + row[2])
                 break
 
+    print(f"There is no meeting with the name '{GLOBAL.NAME}'...")
+
 # List all meetings stored in config.csv
 def ls():
     # Check argument size
