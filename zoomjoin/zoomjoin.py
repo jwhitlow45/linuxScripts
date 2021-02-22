@@ -5,44 +5,45 @@ import sys
 from commands import *
 
 # GLOBAL VARIABLES
-ARGSIZE = len(sys.argv) - 1
+class GLOBAL():
+    ARGSIZE = len(sys.argv) - 1
 
-# ARGUMENTS
-COMMAND = sys.argv[1]
-NAME = ''
-LINK = ''
-PASSWORD = ''
-if ARGSIZE > 1:
-    NAME = sys.argv[2]
-if ARGSIZE > 2:
-    LINK = sys.argv[3]
-if ARGSIZE > 3:
-    PASSWORD = sys.argv[4]
+    # ARGUMENTS
+    COMMAND = sys.argv[1]
+    NAME = ''
+    LINK = ''
+    PASSWORD = ''
+    if ARGSIZE > 1:
+        NAME = sys.argv[2]
+    if ARGSIZE > 2:
+        LINK = sys.argv[3]
+    if ARGSIZE > 3:
+        PASSWORD = sys.argv[4]
 
-# PATHS
-HOME = expanduser('~')
-CONFIG_FILE = HOME + '/scripts/zoomjoin/config.csv'
-TMP_FILE = HOME + '/scripts/zoomjoin/tmp.csv'
+    # PATHS
+    HOME = expanduser('~')
+    CONFIG_FILE = HOME + '/scripts/zoomjoin/config.csv'
+    TMP_FILE = HOME + '/scripts/zoomjoin/tmp.csv'
 
 def main():
-    if not os.path.exists(CONFIG_FILE):
-        with open(CONFIG_FILE, 'w'):
+    if not os.path.exists(GLOBAL.CONFIG_FILE):
+        with open(GLOBAL.CONFIG_FILE, 'w'):
             print('Created initial config file...')
 
     try:
-        if COMMAND == 'add':
+        if GLOBAL.COMMAND == 'add':
             add()
-        elif COMMAND == 'remove':
+        elif GLOBAL.COMMAND == 'remove':
             remove()
-        elif COMMAND == 'clear':
+        elif GLOBAL.COMMAND == 'clear':
             clear()
-        elif COMMAND == 'sort':
+        elif GLOBAL.COMMAND == 'sort':
             sort()
-        elif COMMAND == 'join':
+        elif GLOBAL.COMMAND == 'join':
             join()
-        elif COMMAND == 'ls':
+        elif GLOBAL.COMMAND == 'ls':
             ls()
-        elif COMMAND == 'help':
+        elif GLOBAL.COMMAND == 'help':
             help()
         else:
             raise ValueError('**exception**: invalid command given')        
