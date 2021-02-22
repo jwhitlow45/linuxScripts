@@ -100,7 +100,7 @@ def join():
                 print(f"Joining '{GLOBAL.NAME}'...")
                 if row[2] != '':
                     print('Password: ' + row[2])
-                break
+                return
 
     print(f"There is no meeting with the name '{GLOBAL.NAME}'...")
 
