@@ -40,8 +40,8 @@ def main():
             sort()
         elif COMMAND == 'join':
             join()
-        elif COMMAND == 'list':
-            list()
+        elif COMMAND == 'ls':
+            ls()
         elif COMMAND == 'help':
             help()
         else:
