@@ -4,6 +4,7 @@
 
 alias home='. home'		# Country rooooooads, take me hoooooome
 alias repos='. repos'		# Because I cd into ~/Desktop/githubRepos too much
+alias sqlLocalConnect='sqlcmd -S localhost -U SA' # In fairness, this is just me being lazy
 
 alias boop='shutdown now'	# Because typing two words is too much work
 alias updade='yes | sudo apt update && yes | sudo apt upgrade'
