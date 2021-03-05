@@ -10,6 +10,10 @@ alias boop='shutdown now'	# Because typing two words is too much work
 alias updade='yes | sudo apt update && yes | sudo apt upgrade'
 				# Because this should have been a function in the first place
 
+yeet() { 			# Yeet programs with one command
+  yes | sudo apt-get purge $1 && yes | sudo apt-get autoremove $1
+}
+
 mkcd() {			# Like cmon, when the hell don't you cd into a dir you just made?
   mkdir -p $1 && cd $1
 }
