@@ -8,7 +8,7 @@ alias sqlLocalConnect='sqlcmd -S localhost -U SA' # In fairness, this is just me
 				# Sort applications in menu
 alias sortApplications='gsettings reset org.gnome.shell app-picker-layout'
 alias boop='systemctl poweroff -i' #Because typing two words is too much work
-alias updade='yes | sudo apt update && yes | sudo apt upgrade'
+alias updade='yes | sudo apt update && yes | sudo apt upgrade | sudo apt autoremove'
 				# Because this should have been a function in the first place
 alias ccd='clear && cd'		# Clear terminal and return home
 
