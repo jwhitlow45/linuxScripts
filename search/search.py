@@ -1,7 +1,7 @@
 import sys
 import webbrowser
 
-base_url = "https://duckduckgo.com/?q="
+base_url = "https://google.com/search?q="
 str_to_search = ""
 
 for word in sys.argv[1:]:
