@@ -2,7 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-alias home='. home'		# Country rooooooads, take me hoooooome
 alias repos='. repos'		# Because I cd into ~/Desktop/githubRepos too much
 alias sqlLocalConnect='sqlcmd -S localhost -U SA' # In fairness, this is just me being lazy
 				# Sort applications in menu
@@ -11,6 +10,7 @@ alias boop='systemctl poweroff -i' #Because typing two words is too much work
 alias updade='yes | sudo apt update && yes | sudo apt upgrade | sudo apt autoremove'
 				# Because this should have been a function in the first place
 alias ccd='clear && cd'		# Clear terminal and return home
+alias restart_bluetooth='systemctl restart bluetooth' # Restart borked bluetooth receiver
 
 yeet() { 			# Yeet programs with one command
   yes | sudo apt-get purge $1 && yes | sudo apt-get autoremove $1
@@ -133,4 +133,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+export PATH="$PATH:/opt/mssql-tools/bin"
 export PATH="$PATH:/opt/mssql-tools/bin"
