@@ -10,7 +10,7 @@ alias boop='systemctl poweroff -i' #Because typing two words is too much work
 alias updade='yes | sudo apt update && yes | sudo apt upgrade && yes | sudo apt autoremove'
 				# Because this should have been a function in the first place
 alias ccd='clear && cd'		# Clear terminal and return home
-alias restart_bluetooth='systemctl restart bluetooth' # Restart borked bluetooth receiver
+alias bluetooth='setsid gnome-control-center bluetooth &>/dev/null && setsid systemctl restart bluetooth' # Restart borked bluetooth receiver
 
 yeet() { 			# Yeet programs with one command
   yes | sudo apt-get purge $1 && yes | sudo apt-get autoremove $1
