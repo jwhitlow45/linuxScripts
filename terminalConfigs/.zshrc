@@ -1,5 +1,4 @@
 # Set up the prompt
-
 autoload -Uz promptinit
 promptinit
 
@@ -7,8 +6,21 @@ setopt histignorealldups sharehistory
 setopt noautomenu
 setopt nomenucomplete
 
+## Git branch UI
+# Load version control information
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+# Format the vcs_info_msg_0_ variable
+zstyle ':vcs_info:git:*' formats "%F{227}(%b)%f"
+
+# Set up prompt
+setopt promptsubst
+# PROMPT='%n in ${PWD/#$HOME/~} ${vcs_info_msg_0_} > '
+
 # Custom color prompt stuff
 PROMPT='%F{171}%n@%m%f%F{39}:%f%F{45}%c$%f '
+RPROMPT=\$vcs_info_msg_0_
 eval $(dircolors)
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
