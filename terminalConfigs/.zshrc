@@ -47,7 +47,7 @@ RPROMPT=\$vcs_info_msg_0_
 eval $(dircolors)
 
 ## Aliasses
-alias repos='. repos'		# Because I cd into ~/Desktop/githubRepos too much
+alias repos='cd ~/Desktop/githubRepos'		# Because I cd into ~/Desktop/githubRepos too much
 alias sqlLocalConnect='sqlcmd -S localhost -U SA' # In fairness, this is just me being lazy
 				# Sort applications in menu
 alias sortApplications='gsettings reset org.gnome.shell app-picker-layout'
@@ -78,3 +78,6 @@ bindkey '5~' kill-word
 
 ## Ubuntu search suggestions
 source /etc/zsh_command_not_found
+
+# Import ssh connections
+source ~/.connections
