@@ -1,0 +1,44 @@
+## Git branch UI
+# Load version control information
+autoload -Uz vcs_info
+precmd() { vcs_info }
+# Format the vcs_info_msg_0_ variable
+zstyle ':vcs_info:git:*' formats $'%F{227}\U2387'" %b%f"
+# Set up prompt
+setopt promptsubst
+
+## Custom color prompt stuff
+PROMPT='%F{171}%n@%m%f%F{39}:%f%F{45}%c$%f '
+RPROMPT=\$vcs_info_msg_0_
+eval $(dircolors)
+
+## Aliasses
+alias repos='cd ~/Desktop/githubRepos'		# Because I cd into ~/Desktop/githubRepos too much
+alias sqlLocalConnect='sqlcmd -S localhost -U SA' # In fairness, this is just me being lazy
+				# Sort applications in menu
+alias sortApplications='gsettings reset org.gnome.shell app-picker-layout'
+alias boop='systemctl poweroff -i' #Because typing two words is too much work
+alias updade='yes | sudo apt update && yes | sudo apt upgrade && yes | sudo apt autoremove'
+				# Because this should have been a function in the first place
+alias ccd='clear && cd'		# Clear terminal and return home
+alias bluetooth='setsid gnome-control-center bluetooth &>/dev/null && setsid systemctl restart bluetooth' # Restart borked bluetooth receiver
+
+yeet() { 			# Yeet programs with one command
+  yes | sudo apt-get purge $1 && yes | sudo apt-get autoremove $1
+}
+
+mkcd() {			# Like cmon, when the hell don't you cd into a dir you just made?
+  mkdir -p $1 && cd $1
+}
+
+# Configure ls
+alias ls='ls --color=auto --group-directories-first'
+
+## Key bindings
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+bindkey '^H' backward-kill-word
+bindkey '5~' kill-word
+
+# Import ssh connections
+source ~/.connections
